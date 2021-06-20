@@ -10,7 +10,8 @@ namespace DeleteNodeModules.Core
     internal class Default
     {
         [Verb("default")]
-        internal class Request : IRequest<Unit> {
+        internal class Request : IRequest<Unit>
+        {
             [Option('d', Required = false)]
             public string Directory { get; set; } = System.Environment.CurrentDirectory;
         }
@@ -24,7 +25,7 @@ namespace DeleteNodeModules.Core
                     var arguments = "FOR /d /r . %d in (node_modules) DO @IF EXIST \"%d\" rimraf \"%d\"";
 
                     Console.WriteLine($"Directory: {request.Directory}");
-                    Console.WriteLine("Running");                    
+                    Console.WriteLine("Running");
                     Console.WriteLine(arguments);
 
                     var process = new Process
@@ -46,7 +47,7 @@ namespace DeleteNodeModules.Core
 
                     return new();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.Write(e.Message);
 
